@@ -1,0 +1,127 @@
+/* Стилизация полосы прокрутки */
+::-webkit-scrollbar {
+    width: 12px; /* Ширина полосы */
+    background-color: #f5f5f5; /* Цвет фона полосы */
+}
+
+/* Стилизация "ползунка" (сам элемент прокрутки) */
+::-webkit-scrollbar-thumb {
+    background-color: var(--tblr-primary); /* Основной цвет Bootstrap (primary) */
+    border-radius: 6px; /* Закругленные углы */
+}
+
+/* При наведении на ползунок */
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--tblr-primary); /* Чуть темнее при наведении */
+}
+
+/* Стилизация области, где находится ползунок (опционально) */
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
+}
+
+html {
+    scrollbar-width: thin; /* "thin" или "auto" */
+    scrollbar-color: var(--tblr-primary) #f5f5f5; /* thumb-color track-color */
+}
+
+.table thead th.fixed-column,
+.table tbody td.fixed-column,
+.table tfoot th.fixed-column{
+    position: sticky;
+    left: 0;
+    z-index: 1; /* Чтобы колонка была поверх других */
+    background-color: #393939!important;
+}
+
+.table-sticky-header thead {
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensure the header stays above content */
+    background-color: #393939!important;
+}
+
+
+.cs-list-problems {
+    background: url("/assets/tpl/cs/img/way-bg.webp") center no-repeat;
+}
+
+.cs-steps-list {
+    background: url("/assets/tpl/cs/img/job-line.webp") center 50px no-repeat;
+}
+
+#cs-suppliers-logo .slick-prev {
+    left: 5px;
+}
+#cs-suppliers-logo .slick-next {
+    right: 5px;
+}
+
+@keyframes bplay {
+    50% {
+        opacity: 0; /* Элемент становится невидимым */
+    }
+}
+
+.bplay-element {
+    animation: bplay 0.5s step-end infinite; /* Имя анимации, длительность, резкий переход, бесконечность */
+}
+
+.cs-faq-item div[aria-expanded="true"] span:first-child {
+    position: relative;
+    top: 10px;
+    transform: rotate(45deg); /* Rotates the icon 180 degrees (upwards) */
+    color: orangered;
+}
+
+.scroll-down-arrow img {
+    /* Apply the animation to the icon */
+    animation: bounce 1.5s infinite;
+    font-size: 2rem; /* Make the arrow larger */
+    color: #007bff; /* Optional: Bootstrap primary color */
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+.preloader {
+    position: absolute; /* Накладывается поверх контента */
+    top: 0;
+    left: 0;
+    width: 100%; /* Занимает всю ширину родителя */
+    height: 100%; /* Занимает всю высоту родителя */
+    background-color: rgba(125, 125, 125, 0.50);
+    z-index: 100; /* Чтобы был поверх всего */
+}
+
+.hide {
+    display: none!important;
+}
+
+@media (min-width: 576px) {
+
+    .cs-list-problem-item-one::after {
+        position: absolute;
+        content: url(/assets/tpl/cs/img/arrow-way.webp);
+        top: -15px;
+        right: -175px;
+    }
+
+    .cs-list-problem-item-two::before {
+        position: absolute;
+        content: url(/assets/tpl/cs/img/arrow-way2.webp);
+        top: -15px;
+        left: -175px;
+    }
+
+}

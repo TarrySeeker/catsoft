@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CatSoft — Единое решение подбора Б/У запчастей со скидкой</title>
+
+    <!-- GSAP for Vanguard Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Vanguard Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="is-loading">
+
+    <!-- Custom Cursor -->
+    <div class="cursor hidden-mobile"></div>
+    <div class="cursor-follower hidden-mobile"></div>
+
+    <!-- Ambient Space Glow -->
+    <div class="ambient-glow glow-1"></div>
+    <div class="ambient-glow glow-2"></div>
+    <div class="ambient-glow glow-3"></div>
+
+    <!-- Modals Overlay -->
+    <div class="cs-modal-overlay">
+        <!-- Политика -->
+        <div class="cs-modal" id="modal-policy">
+            <div class="cs-modal__header">
+                <h2>Политика конфиденциальности</h2>
+                <button class="cs-modal__close">&times;</button>
+            </div>
+            <div class="cs-modal__body cs-modal__scrollable">
+                <p><strong>1. Общие положения</strong></p>
+                <p>Настоящая политика обработки персональных данных составлена в соответствии с требованиями Федерального закона от 27.07.2006. №152-ФЗ «О персональных данных»...</p>
+                <p><strong>2. Основные понятия</strong></p>
+                <p>Автоматизированная обработка персональных данных – обработка персональных данных с помощью средств вычислительной техники;</p>
+                <p>Блокирование персональных данных – временное прекращение обработки персональных данных (за исключением случаев, если обработка необходима для уточнения персональных данных);</p>
+            </div>
+        </div>
+
+        <!-- Консультация -->
+        <div class="cs-modal" id="modal-consult">
+            <div class="cs-modal__header">
+                <h2>Получить консультацию</h2>
+                <button class="cs-modal__close">&times;</button>
+            </div>
+            <div class="cs-modal__body">
+                <form class="cs-form-feedback" action="/sendFeedBack" method="POST">
+                    <input type="text" name="name" class="cs-input" placeholder="Ваше Имя">
+                    <input type="tel" name="phone" class="cs-input" placeholder="Номер телефона" required>
+                    <label class="cs-checkbox-wrap">
+                        <input type="checkbox" name="apply" value="1" checked required>
+                        <span>Нажимая кнопку, Вы принимаете <a href="#" data-modal-target="modal-policy">Политику конфиденциальности</a></span>
+                    </label>
+                    <button type="submit" class="vg-btn w-full">Отправить данные</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Видео отзывы -->
+        <div class="cs-modal" id="modal-video-1">
+            <div class="cs-modal__header">
+                <h2>СТО Гараж</h2>
+                <button class="cs-modal__close">&times;</button>
+            </div>
+            <div class="cs-modal__body" style="padding: 0;">
+                <video src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/sto3.mp4" controls class="cs-video-elem"></video>
+            </div>
+        </div>
+
+        <!-- Основное видео -->
+        <div class="cs-modal" id="modal-video-main">
+            <div class="cs-modal__header">
+                <h2>Как работает CatSoft</h2>
+                <button class="cs-modal__close">&times;</button>
+            </div>
+            <div class="cs-modal__body" style="padding: 0;">
+                <video src="assets/tpl/cs/media/video-cut-ip.mp4" controls class="cs-video-elem"></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="vg-header">
+        <div class="vg-container vg-header__inner">
+            <div class="vg-header__brand">
+                <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/logo.webp" alt="Catsoft Logo" style="height: 48px;">
+            </div>
+            <div class="vg-header__center hidden-mobile">
+                Программа для поиска б/у запчастей
+            </div>
+            <div class="vg-header__contact">
+                <a href="tel:88001006518" class="vg-header__phone hidden-mobile">8-800-100-65-18</a>
+                <button class="vg-btn vg-btn--border" data-modal-target="modal-consult">Связаться</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. THE MASK HERO -->
+        <section class="vg-hero">
+            <div class="vg-hero__video-wrapper">
+                <video src="assets/tpl/cs/media/video-cut-ip.mp4" autoplay muted loop playsinline class="vg-hero__bg-video"></video>
+            </div>
+            <div class="vg-hero__mask-layer">
+                <h1 class="vg-hero__giant-text">CATSOFT</h1>
+            </div>
+            <div class="vg-container vg-hero__content">
+                <div class="vg-hero__text-box">
+                    <h2 class="vg-hero__subtitle">Единое решение подбора и проценки Б/У запчастей со скидкой</h2>
+                    <p class="vg-hero__desc">Новое приложение, позволяющее работать с крупнейшими авторазборами в РФ по единому договору. Мы взяли на себя поиск, сбор, унификацию всех б/у деталей от самых крупных разборов РФ.</p>
+                    <div class="vg-hero__actions">
+                        <button class="vg-btn vg-btn--glow" data-modal-target="modal-consult">Попробовать бесплатно</button>
+                        <button class="vg-btn-play js-magnet" data-modal-target="modal-video-main"></button>
+                    </div>
+                    <p class="vg-hero__hint">Регистрация займет 1 минуту</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. BENTO BOX GRID -->
+        <section class="vg-bento-section">
+            <div class="vg-container">
+                <div class="vg-section-header">
+                    <h2 class="vg-section-title">Экосистема в цифрах и фактах</h2>
+                    <p>Комплексный подход для вашего бизнеса</p>
+                </div>
+                <div class="bento-grid">
+                    <!-- STATS -->
+                    <div class="bento-item bento-stat">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic3.png" alt="Icon">
+                        <h3>42+</h3>
+                        <p>Крупнейших авторазборов</p>
+                    </div>
+                    <div class="bento-item bento-stat">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic18.png" alt="Icon">
+                        <h3>24 млн.</h3>
+                        <p>Деталей в удобном поиске</p>
+                    </div>
+                    <div class="bento-item bento-stat">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic10.png" alt="Icon">
+                        <h3>От 5%</h3>
+                        <p>Гарантированная скидка</p>
+                    </div>
+                    <!-- AUDIENCE -->
+                    <div class="bento-item bento--span-2 bento--img-bg">
+                        <div class="bento-bg"><img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/sec1.webp" alt="STO"></div>
+                        <div class="bento-content">
+                            <button class="vg-btn-play vg-btn-play--small" data-modal-target="modal-video-1"></button>
+                            <h3>Станциям ТО</h3>
+                            <p>Доп заработок без инвестиций. Удерживайте старых и привлекайте новых клиентов.</p>
+                        </div>
+                    </div>
+                    <div class="bento-item bento--span-2 bento--img-bg">
+                        <div class="bento-bg"><img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/sec2.webp" alt="Automagazin"></div>
+                        <div class="bento-content">
+                            <h3>Автомагазинам</h3>
+                            <p>Доп заработок без инвестиций. Привлекайте больше клиентов с новыми возможностями.</p>
+                        </div>
+                    </div>
+                    <!-- ADVANTAGES -->
+                    <div class="bento-item bento-adv bento--span-2">
+                        <h3>Максимальные скидки</h3>
+                        <p>Начиная работать с нами, вы автоматически получаете нашу накопительную скидку.</p>
+                    </div>
+                    <div class="bento-item bento-adv bento--span-1">
+                        <h3>Единое окно</h3>
+                        <p>Больше никаких вкладок.</p>
+                    </div>
+                    <div class="bento-item bento-adv bento--span-1">
+                        <h3>Агрегатор</h3>
+                        <p>Все в одном месте.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ONLINE EVAL -->
+        <section class="vg-eval-section">
+            <div class="vg-container">
+                <div class="vg-eval-glass">
+                    <div class="vg-eval__text">
+                        <h2>Оценка онлайн <span>по фото</span> <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bottle.webp" alt="Icon" class="inline-icon"></h2>
+                        <p>Специально для СТО. Оценка стоимости восстановления авто с поиском б/у деталей сразу по фото.</p>
+                        <button class="vg-btn vg-btn--glow" data-modal-target="modal-consult">Оценить сейчас</button>
+                    </div>
+                    <div class="vg-eval__image-box">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/demo.webp" alt="Online Eval" class="vg-eval__mockup">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. HORIZONTAL SCROLL -->
+        <section class="vg-horizontal-wrap">
+            <div class="vg-horizontal-container">
+                <div class="h-panel h-panel--title">
+                    <h2>Как это<br><span class="text-orange">работает?</span></h2>
+                    <p>4 простых шага, которые изменят ваш бизнес</p>
+                </div>
+                <div class="h-panel h-step">
+                    <div class="h-step__num">1</div>
+                    <div class="h-step__card">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/job1.webp" alt="Step 1">
+                        <p>Удобный поиск по названию или ОЕМ. Достаточно ввести ОЕМ или марку/модель в строку.</p>
+                    </div>
+                </div>
+                <div class="h-panel h-step">
+                    <div class="h-step__num">2</div>
+                    <div class="h-step__card">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/job2.webp" alt="Step 2">
+                        <p>Собранные предложения сразу от всех поставщиков появляются на едином экране.</p>
+                    </div>
+                </div>
+                <div class="h-panel h-step">
+                    <div class="h-step__num">3</div>
+                    <div class="h-step__card">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/job3.webp" alt="Step 3">
+                        <p>Деталь добавляется в корзину в формате "1 клик".</p>
+                    </div>
+                </div>
+                <div class="h-panel h-step">
+                    <div class="h-step__num">4</div>
+                    <div class="h-step__card">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/job4.webp" alt="Step 4">
+                        <p>Управление заказами: отслеживание, логистика, получение и возврат в "едином" окне.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. STICKY SPLIT SCREEN -->
+        <section class="vg-sticky-section">
+            <div class="vg-container vg-split-layout">
+                <div class="vg-split-left">
+                    <div class="vg-sticky-box">
+                        <h2 class="vg-giant-heading">Время<br><span class="text-transparent-stroke">Действовать</span></h2>
+                        <p>Хватит тратить миллионы минут на поиск. Решайте проблемы и делайте работу безопаснее прямо сейчас.</p>
+                        <div class="vg-decor-line"></div>
+                        <div class="vg-decor-line"></div>
+                    </div>
+                </div>
+                <div class="vg-split-right">
+                    <!-- Problems -->
+                    <div class="vg-card-stack">
+                        <div class="vg-card problem-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bottle.webp" alt="icon">
+                            <div>
+                                <h3>Трата времени</h3>
+                                <p>Заходя на сайт каждого поставщика отдельно.</p>
+                            </div>
+                        </div>
+                        <div class="vg-card problem-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bottle.webp" alt="icon">
+                            <div>
+                                <h3>Трата нервов</h3>
+                                <p>Совмещая доставку из разных уголков страны.</p>
+                            </div>
+                        </div>
+                        <div class="vg-card problem-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bottle.webp" alt="icon">
+                            <div>
+                                <h3>Потеря денег</h3>
+                                <p>Вам необходимо наработать огромный оборот для своей скидки.</p>
+                            </div>
+                        </div>
+                        <div class="vg-card problem-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bottle.webp" alt="icon">
+                            <div>
+                                <h3>Риски</h3>
+                                <p>Вы вынуждены самостоятельно проверять разбор, заключать договор и осуществлять возврат.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="vg-divider"></div>
+
+                    <!-- Choices -->
+                    <div class="vg-card-group">
+                        <h3 class="group-title">1 из 2 путей развития</h3>
+                        <div class="vg-card choice-card danger-card">
+                            <span class="vg-badge vg-badge--danger">Долго и дорого</span>
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/way1.webp" alt="Old way">
+                            <p>Регистрироваться в десятках кабинетов. Запрашивать цены, терять время на оформление и рисковать своими деньгами.</p>
+                        </div>
+                        <div class="vg-card choice-card success-card">
+                            <span class="vg-badge vg-badge--success">Быстро и умно</span>
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/way2.webp" alt="New way">
+                            <p>Зарегистрироваться на Catsoft один раз. Работать со всеми поставщиками, получать скидки, кэшбек и экономить время.</p>
+                        </div>
+                    </div>
+
+                    <div class="vg-divider"></div>
+
+                    <!-- Safe Deal -->
+                    <div class="vg-card-group">
+                        <h3 class="group-title">Безопасность сделок</h3>
+                        <div class="vg-card safe-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic18.png" alt="icon">
+                            <div>
+                                <h4>Оплата счета</h4>
+                                <p>Счет клиенту выставляется от нашей организации, что дает абсолютную безопасность.</p>
+                            </div>
+                        </div>
+                        <div class="vg-card safe-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic3.png" alt="icon">
+                            <div>
+                                <h4>Возврат</h4>
+                                <p>В случае возврата вы получаете деньги назад за 2 дня. Нет нужды требовать их с незнакомых разборов.</p>
+                            </div>
+                        </div>
+                        <div class="vg-card safe-card">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ic10.png" alt="icon">
+                            <div>
+                                <h4>Единый договор</h4>
+                                <p>Работайте по единому договору со всеми авторазборами через нашу платформу.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TARIFFS -->
+        <section class="vg-tariffs">
+            <div class="vg-container">
+                <h2 class="vg-section-title">Тарифы</h2>
+                <div class="vg-table-responsive">
+                    <table class="vg-table vg-glass-panel">
+                        <thead>
+                            <tr>
+                                <th>Функция</th>
+                                <th>Бесплатный</th>
+                                <th>Партнёр</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Поиск деталей</td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                            </tr>
+                            <tr>
+                                <td>Скидка от 5%</td>
+                                <td><span class="vg-cross">&#10007;</span></td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                            </tr>
+                            <tr>
+                                <td>Кэшбек</td>
+                                <td><span class="vg-cross">&#10007;</span></td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                            </tr>
+                            <tr>
+                                <td>Приоритетная поддержка</td>
+                                <td><span class="vg-cross">&#10007;</span></td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                            </tr>
+                            <tr>
+                                <td>Оценка по фото</td>
+                                <td><span class="vg-cross">&#10007;</span></td>
+                                <td><span class="vg-check">&#10003;</span></td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Стоимость</th>
+                                <th>0 &#8381;</th>
+                                <th>По запросу</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <p class="vg-table-note">* Партнёрский тариф подключается после консультации с менеджером.</p>
+            </div>
+        </section>
+
+        <!-- 7. MARQUEE LOGOS -->
+        <section class="vg-marquee-wrap">
+            <div class="vg-container">
+                <div class="vg-marquee">
+                    <div class="vg-marquee__track js-marquee-track">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/aliga.png" alt="Aliga">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autostrong.png" alt="Autostrong">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/dizauto.png" alt="Dizauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/f-auto.png" alt="F-Auto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/maksauto.png" alt="Maksauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/mihalych.png" alt="Mihalych">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/nordline.png" alt="Nordline">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/pushkin.png" alt="Pushkin">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/raz72.png" alt="Raz72">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/redcar.png" alt="Redcar">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/smartauto.png" alt="Smartauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/stopgo.png" alt="Stopgo">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/vint-t.png" alt="Vint-T">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/vrazbore.png" alt="Vrazbore">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/agk.jpg" alt="AGK">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autobreaker.jpg" alt="Autobreaker">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autoshtab.jpg" alt="Autoshtab">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bitauto.jpg" alt="Bitauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/dvizhok.jpg" alt="Dvizhok">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ea.jpg" alt="EA">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorcity.jpg" alt="Motorcity">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorherz.jpg" alt="Motorherz">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorland.jpg" alt="Motorland">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/oktavto.jpg" alt="Oktavto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/pod_kapotom.jpg" alt="Pod Kapotom">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/razborrf.jpg" alt="RazborRF">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/roga_i_kopyta.jpg" alt="Roga i Kopyta">
+                        <!-- Duplicate for infinite scroll -->
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/aliga.png" alt="Aliga">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autostrong.png" alt="Autostrong">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/dizauto.png" alt="Dizauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/f-auto.png" alt="F-Auto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/maksauto.png" alt="Maksauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/mihalych.png" alt="Mihalych">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/nordline.png" alt="Nordline">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/pushkin.png" alt="Pushkin">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/raz72.png" alt="Raz72">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/redcar.png" alt="Redcar">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/smartauto.png" alt="Smartauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/stopgo.png" alt="Stopgo">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/vint-t.png" alt="Vint-T">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/vrazbore.png" alt="Vrazbore">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/agk.jpg" alt="AGK">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autobreaker.jpg" alt="Autobreaker">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/autoshtab.jpg" alt="Autoshtab">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/bitauto.jpg" alt="Bitauto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/dvizhok.jpg" alt="Dvizhok">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/ea.jpg" alt="EA">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorcity.jpg" alt="Motorcity">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorherz.jpg" alt="Motorherz">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/motorland.jpg" alt="Motorland">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/oktavto.jpg" alt="Oktavto">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/pod_kapotom.jpg" alt="Pod Kapotom">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/razborrf.jpg" alt="RazborRF">
+                        <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/roga_i_kopyta.jpg" alt="Roga i Kopyta">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FAQ -->
+        <section class="vg-faq">
+            <div class="vg-container">
+                <h2 class="vg-section-title">Вопрос/Ответ</h2>
+                <div class="vg-accordion-wrap">
+                    <div class="vg-accordion">
+                        <button class="vg-acc-trigger"><span>Это бесплатно?</span> <i class="plus-icon">+</i></button>
+                        <div class="vg-acc-content"><p>Да, регистрация и поиск бесплатны для всех пользователей.</p></div>
+                    </div>
+                    <div class="vg-accordion">
+                        <button class="vg-acc-trigger"><span>Могу ли я получать детали сам?</span> <i class="plus-icon">+</i></button>
+                        <div class="vg-acc-content"><p>Да, вы можете самостоятельно забрать заказ.</p></div>
+                    </div>
+                    <div class="vg-accordion">
+                        <button class="vg-acc-trigger"><span>Как происходит возврат?</span> <i class="plus-icon">+</i></button>
+                        <div class="vg-acc-content"><p>Через наш сервис за 2 дня, гарантия возврата.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. CONTACT -->
+        <section class="vg-contact">
+            <div class="vg-container">
+                <div class="vg-bento-contact">
+                    <div class="contact-form-side">
+                        <h2 class="vg-giant-heading" style="font-size:3rem;">Свяжитесь<br><span class="text-orange">с нами</span></h2>
+                        <form class="cs-form-feedback" action="/sendFeedBack" method="POST">
+                            <input type="text" name="name" class="cs-input" placeholder="Ваше Имя">
+                            <input type="tel" name="phone" class="cs-input" placeholder="Номер телефона" required>
+                            <label class="cs-checkbox-wrap">
+                                <input type="checkbox" name="apply" value="1" checked required>
+                                <span>Принимаю <a href="#" data-modal-target="modal-policy">Политику</a></span>
+                            </label>
+                            <button type="submit" class="vg-btn vg-btn--glow">Отправить форму</button>
+                        </form>
+                    </div>
+                    <div class="contact-manager-side">
+                        <div class="manager-card vg-glass-panel">
+                            <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/woman.webp" alt="Менеджер">
+                            <h3>Павел, менеджер по развитию</h3>
+                            <ul>
+                                <li>Помогу зарегистрироваться</li>
+                                <li>Установлю программу</li>
+                                <li>Покажу как работать</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="vg-footer">
+        <div class="vg-container">
+            <div class="vg-footer-flex">
+                <div class="f-brand">
+                    <img src="./Единое решение подбора и проценки Б_У запчастей со скидкой - Catsoft_files/logo.webp" alt="Catsoft" style="height: 48px;">
+                </div>
+                <div class="f-phone">
+                    <a href="tel:88001006518">8-800-100-65-18</a>
+                </div>
+            </div>
+            <div class="vg-footer-bottom">
+                <div>
+                    <p>ИП ИВАНЧЕНКО МИХАИЛ ВИТАЛЬЕВИЧ</p>
+                    <p>ИНН 540446738981, ОГРНИП 319547600155097</p>
+                </div>
+                <div>
+                    <a href="#" data-modal-target="modal-policy">Политика конфиденциальности</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vanguard Custom JS -->
+    <script src="main.js"></script>
+</body>
+</html>
