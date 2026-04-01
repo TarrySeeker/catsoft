@@ -742,6 +742,8 @@ img {
 
     /* --- Hero --- */
     .vg-hero { min-height: 100svh; }
+    /* Уменьшаем CATSOFT чтобы влезал на экран (25vw → 18vw) */
+    .vg-hero__giant-text { font-size: 18vw; }
     .vg-hero__text-box { margin-top: 5vh; padding: 0 1rem; }
     .vg-hero__subtitle { font-size: clamp(1.2rem, 5vw, 1.8rem); }
     .vg-hero__desc { font-size: 1rem; }

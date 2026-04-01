@@ -61,11 +61,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // --- 3. VANGUARD HERO ENTRANCE (Video Mask) ---
     // The mask text scales down and the opacity of content fades in
+    const isMobile = window.innerWidth <= 768;
     const tlHero = gsap.timeline({ delay: 0.3 });
     tlHero.from('.vg-hero__giant-text', { 
-        scale: 5, 
+        scale: isMobile ? 1.3 : 5, 
         opacity: 0, 
-        duration: 2, 
+        duration: 2.5, 
         ease: 'expo.out' 
     })
     .from('.vg-hero__subtitle', { y: 30, opacity: 0, duration: 1, ease: 'power3.out'}, "-=1.2")
