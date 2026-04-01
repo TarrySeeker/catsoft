@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- 0. Remove Preloader ---
-    setTimeout(() => {
-        document.body.classList.remove('is-loading');
-    }, 100);
+    // --- 0. Preloader / Loading Logic ---
+    const isMobile = window.innerWidth <= 768;
+    const preloader    = document.getElementById('vg-preloader');
+    const preloaderBar = document.getElementById('vg-preloader-bar');
 
     gsap.registerPlugin(ScrollTrigger);
 
@@ -135,29 +135,54 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // --- 3. HERO ENTRANCE ANIMATION ---
-    const isMobile = window.innerWidth <= 768;
     const startScale = isMobile ? 1.3 : 2.5;
 
-    // Фиксируем начальное состояние ДО инициализации ScrollTrigger
+    // Фиксируем начальное состояние сразу
     gsap.set('.vg-hero__giant-text', { scale: startScale, opacity: 0 });
     gsap.set('.vg-hero__subtitle',   { opacity: 0, y: 30 });
     gsap.set('.vg-hero__desc',       { opacity: 0, y: 20 });
     gsap.set('.vg-hero__actions',    { opacity: 0, y: 20 });
 
-    const tlHero = gsap.timeline({
-        delay: 0.3,
-        onComplete: initScrollAnimations  // ScrollTrigger стартует только здесь
-    });
+    const startHeroAnim = () => {
+        const tlHero = gsap.timeline({ onComplete: initScrollAnimations });
+        tlHero
+            .to('.vg-hero__giant-text', {
+                scale: 1, opacity: 1,
+                duration: isMobile ? 2.5 : 3,
+                ease: 'power2.out'
+            })
+            .to('.vg-hero__subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1.2")
+            .to('.vg-hero__desc',     { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1")
+            .to('.vg-hero__actions',  { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=0.8");
+    };
 
-    tlHero
-        .to('.vg-hero__giant-text', {
-            scale: 1, opacity: 1,
-            duration: 3,
-            ease: 'power2.out'
-        })
-        .to('.vg-hero__subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1.2")
-        .to('.vg-hero__desc',     { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1")
-        .to('.vg-hero__actions',  { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=0.8");
+    if (!isMobile && preloader && preloaderBar) {
+        // Desktop: тело сразу видимое (прелоадер перекрывает), запускаем прогресс-бар
+        document.body.classList.remove('is-loading');
+
+        gsap.to(preloaderBar, {
+            width: '100%',
+            duration: 2.5,
+            ease: 'power1.inOut',
+            onComplete: () => {
+                // Фейдаут прелоадера, потом запуск hero-анимации
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.5,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        startHeroAnim();
+                    }
+                });
+            }
+        });
+    } else {
+        // Mobile: штатное поведение
+        setTimeout(() => {
+            document.body.classList.remove('is-loading');
+            setTimeout(startHeroAnim, 200);
+        }, 100);
+    }
 
     // --- 4. MODALS & VIDEO LOGIC ---
     const overlay = document.querySelector('.cs-modal-overlay');

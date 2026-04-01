@@ -697,6 +697,49 @@ input, textarea, select {
 .cs-video-elem { width: 100%; border-radius: 12px; }
 
 /* ==========================================================================
+   PRELOADER (Desktop only)
+   ========================================================================== */
+.vg-preloader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-color);
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.vg-preloader__logo {
+    height: 56px;
+    width: auto;
+    opacity: 0.95;
+    filter: drop-shadow(0 0 24px rgba(255,85,0,0.3));
+}
+
+.vg-preloader__track {
+    width: 220px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 99px;
+    overflow: hidden;
+}
+
+.vg-preloader__bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    border-radius: 99px;
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* Скрываем прелоадер на мобайле — там работает штатная анимация */
+@media (max-width: 768px) {
+    .vg-preloader { display: none !important; }
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
