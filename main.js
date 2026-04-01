@@ -60,30 +60,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // --- 3. VANGUARD HERO ENTRANCE (Video Mask) ---
-    // The mask text scales down and the opacity of content fades in
     const isMobile = window.innerWidth <= 768;
-    const tlHero = gsap.timeline({ delay: 0.3 });
-    tlHero.from('.vg-hero__giant-text', { 
-        scale: isMobile ? 1.3 : 2.5, 
-        opacity: 0, 
-        duration: 3, 
-        ease: 'power2.out' 
-    })
-    .from('.vg-hero__subtitle', { y: 30, opacity: 0, duration: 1, ease: 'power3.out'}, "-=1.2")
-    .from('.vg-hero__desc', { y: 20, opacity: 0, duration: 1, ease: 'power3.out'}, "-=1")
-    .from('.vg-hero__actions', { y: 20, opacity: 0, duration: 1, ease: 'power3.out'}, "-=0.8");
+    const startScale = isMobile ? 1.3 : 2.5;
 
-    // Parallax on Giant Text when scrolling down
-    gsap.to('.vg-hero__giant-text', {
-        yPercent: -50,
-        ease: "none",
-        scrollTrigger: {
-            trigger: '.vg-hero',
-            start: "top top",
-            end: "bottom top",
-            scrub: true
+    // Сразу фиксируем начальное состояние, чтобы ScrollTrigger.refresh() не мешал
+    gsap.set('.vg-hero__giant-text', { scale: startScale, opacity: 0 });
+    gsap.set('.vg-hero__subtitle', { opacity: 0, y: 30 });
+    gsap.set('.vg-hero__desc',     { opacity: 0, y: 20 });
+    gsap.set('.vg-hero__actions',  { opacity: 0, y: 20 });
+
+    const tlHero = gsap.timeline({
+        delay: 0.3,
+        onComplete: () => {
+            // Parallax запускаем только после завершения intro — без конфликтов
+            gsap.to('.vg-hero__giant-text', {
+                yPercent: -50,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: '.vg-hero',
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true
+                }
+            });
         }
     });
+
+    tlHero
+        .to('.vg-hero__giant-text', {
+            scale: 1, opacity: 1,
+            duration: 3,
+            ease: 'power2.out'
+        })
+        .to('.vg-hero__subtitle', { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1.2")
+        .to('.vg-hero__desc',     { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=1")
+        .to('.vg-hero__actions',  { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, "-=0.8");
 
     // --- 4. BENTO GRID REVEALS ---
     const bentoItems = gsap.utils.toArray('.bento-item');
