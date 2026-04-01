@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth <= 768;
     const tlHero = gsap.timeline({ delay: 0.3 });
     tlHero.from('.vg-hero__giant-text', { 
-        scale: isMobile ? 1.3 : 5, 
+        scale: isMobile ? 1.3 : 1.5, 
         opacity: 0, 
         duration: 2.5, 
         ease: 'expo.out' 
