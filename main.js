@@ -64,10 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const isMobile = window.innerWidth <= 768;
     const tlHero = gsap.timeline({ delay: 0.3 });
     tlHero.from('.vg-hero__giant-text', { 
-        scale: isMobile ? 1.3 : 1.5, 
+        scale: isMobile ? 1.3 : 2.5, 
         opacity: 0, 
-        duration: 2.5, 
-        ease: 'expo.out' 
+        duration: 3, 
+        ease: 'power2.out' 
     })
     .from('.vg-hero__subtitle', { y: 30, opacity: 0, duration: 1, ease: 'power3.out'}, "-=1.2")
     .from('.vg-hero__desc', { y: 20, opacity: 0, duration: 1, ease: 'power3.out'}, "-=1")
